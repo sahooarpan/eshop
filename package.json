@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "frontend": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run start\" \"npm run frontend\""
   },
   "author": "Arpan",
   "license": "ISC",
@@ -18,9 +20,11 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.16",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "nodemon": "^2.0.6"
   }
 }

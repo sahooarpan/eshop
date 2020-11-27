@@ -1,9 +1,20 @@
 const User = require('../models/userModel');
 const express = require('express')
 const bcrypt = require('bcryptjs')
-const { generateToken } = require('../utils')
+const { generateToken, isAuth } = require('../utils');
 
 const userRouter = express.Router();
+
+userRouter.get('/',isAuth,async(req,res)=>{
+    try {
+        const user = await User.findById(req.user).select('-password');
+        console.log(user);
+        res.json(user);
+    } catch (error) {
+        
+    }
+})
+
 userRouter.post('/signup',async(req,res)=>{
     if(req.body.password!==req.body.confirmPassword){
         res.status(401).json({message:"Password and Confirm Password must be same!"});
