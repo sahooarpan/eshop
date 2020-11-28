@@ -1,14 +1,15 @@
 const express = require('express');
 const productRoute = express.Router();
-const Product = require('../models/productModel')
+const Product = require('../models/productModel');
+const { isAuth } = require('../utils');
 
 
-productRoute.post('/',async(req,res)=>{
+productRoute.post('/',isAuth,async(req,res)=>{
     const product = new Product({
         name:req.body.name,
         image:req.body.image,
         price:req.body.price,
-        category:req.body.category
+        quantity_available:req.body.quantity_available
     })
 
     const savedProduct = await product.save();
@@ -20,9 +21,9 @@ productRoute.post('/',async(req,res)=>{
 
 })
 
-productRoute.get('/',async(req,res)=>{
+productRoute.get('/',isAuth,async(req,res)=>{
     const products = await Product.find();
-    res.json({products})
+    res.send(products)
 })
 
 module.exports=productRoute

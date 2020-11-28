@@ -47,7 +47,7 @@ export default function user(state=userState,action){
                 loading:false,
                 userInfo:null,
                 isAuthenticated:false,
-                error:action.payload,   
+                error:action.payload   
             }     
            
           

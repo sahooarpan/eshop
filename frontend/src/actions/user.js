@@ -69,7 +69,7 @@ export const logOut=()=>async dispatch=>{
 
 
 
-export const userLoad =()=>async(dispatch,getState)=>{
+export const userLoad =()=>async(dispatch)=>{
     dispatch({type:USER_LOAD_REQUEST})
     try {
         const { data } = await axios.get('/api/users');

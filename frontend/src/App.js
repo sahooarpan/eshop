@@ -7,8 +7,8 @@ import Shop from './components/Shop'
 import { useDispatch } from 'react-redux'
 import { userLoad } from './actions/user'  
 import PrivateRoute from './components/routing/PrivateRoute'
-import Axios from 'axios'
 import { setAuthToken } from './utils/setAuthToken'
+import CheckOut from './components/CheckOut'
 const App = () => {
   const dispatch = useDispatch();
   if(localStorage.getItem('userInfo')){
@@ -30,6 +30,7 @@ const App = () => {
       <Switch>
       <Route exact path='/signin' component={SignIn} />
       <PrivateRoute exact path='/shop' component={Shop} />
+      <Route  path='/checkout' component={CheckOut} />
       <Route exact path='/' component={SignUp} />
      
       </Switch>
