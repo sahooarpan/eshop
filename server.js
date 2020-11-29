@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`));
   });
 }
-app.listen("5000", () => {
+const port =  process.env.PORT || 5000
+app.listen(port, () => {
   console.log(`Server started`);
 });
