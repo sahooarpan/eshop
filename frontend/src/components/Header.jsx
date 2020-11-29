@@ -40,10 +40,10 @@ const Header = () => {
         </div>
       ) : (
         <div>
-          <Link className="header-link" to="/">
+          <Link className="header-link" to="/signup">
             Register
           </Link>
-          <Link to="/signin" className="header-link">
+          <Link to="/" className="header-link">
             Sign In
           </Link>
         </div>

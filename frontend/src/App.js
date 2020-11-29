@@ -29,13 +29,13 @@ const App = () => {
 
       <div>
         <Switch>
-          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
           <PrivateRoute exact path="/shop" component={Shop} />
           <PrivateRoute path="/checkout" component={CheckOut} />
           <PrivateRoute path="/payment" component={Payment} />
           <PrivateRoute path="/myorders" component={OrderHistory} />
           <PrivateRoute path="/order/:id" component={OrderScreen} />
-          <Route exact path="/" component={SignUp} />
+          <Route exact path="/" component={SignIn} />
         </Switch>
       </div>
     </BrowserRouter>
