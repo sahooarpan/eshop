@@ -13,4 +13,4 @@ Installs all the required dependencies
 It will run both frontend and backend server parallely.
 
 ### `Production URL`
-[a link]([a link](https://groceryapl.herokuapp.com)
+([Grocery App](https://groceryapl.herokuapp.com)
