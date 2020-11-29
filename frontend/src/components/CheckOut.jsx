@@ -29,6 +29,7 @@ const CheckOut = ({ history }) => {
       <div className="total">
         <h5>TOTAL:{totalPrice}</h5>
         <button
+          disabled={cartItems.length===0}  
           onClick={() => history.push("/payment")}
           className="btn btn-primary"
         >
