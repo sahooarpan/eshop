@@ -11,7 +11,6 @@ const SignIn = ({ history }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
-    console.log(auth);
   };
   useEffect(() => {
     if (auth.isAuthenticated) {
@@ -46,7 +45,7 @@ const SignIn = ({ history }) => {
             />
           </li>
           <li>
-            <button className="button primary text-center" type="submit">
+            <button disabled={email==='' || password ==='' } className="button primary text-center" type="submit">
               Sign In
             </button>
           </li>

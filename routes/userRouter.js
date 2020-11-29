@@ -36,6 +36,22 @@ userRouter.post("/signup", async (req, res) => {
   });
 });
 
+userRouter.post('/email',async(req,res)=>{
+  try {
+    const user = await User.find({email:req.body.email});
+    console.log(user.length);
+    if(user.length){
+      console.log("here")
+      res.status(200).json({user});
+    }
+    
+  } catch (error) {
+   res.status(500).json({message:error.message}); 
+  }
+})
+
+
+
 userRouter.post("/signin", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
