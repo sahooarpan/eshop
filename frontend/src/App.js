@@ -9,6 +9,11 @@ import { userLoad } from './actions/user'
 import PrivateRoute from './components/routing/PrivateRoute'
 import { setAuthToken } from './utils/setAuthToken'
 import CheckOut from './components/CheckOut'
+import Payment from './components/Payment'
+import OrderHistory from './components/OrderHistory'
+import OrderScreen from './components/OrderScreen'
+
+
 const App = () => {
   const dispatch = useDispatch();
   if(localStorage.getItem('userInfo')){
@@ -24,18 +29,21 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    <div className="grid-container">
+    
       <Header/>
       <main>
       <Switch>
       <Route exact path='/signin' component={SignIn} />
       <PrivateRoute exact path='/shop' component={Shop} />
-      <Route  path='/checkout' component={CheckOut} />
+      <PrivateRoute  path='/checkout' component={CheckOut} />
+      <PrivateRoute path='/payment' component={Payment} />
+      <PrivateRoute path='/myorders' component={OrderHistory} />
+      <PrivateRoute path='/order/:id' component={OrderScreen} />
       <Route exact path='/' component={SignUp} />
      
       </Switch>
       </main>
-    </div>
+    
     </BrowserRouter>
   )
 }

@@ -1,41 +1,42 @@
-import React,{useEffect, useState} from 'react'
-import { useSelector } from 'react-redux'
+import React,{useEffect} from 'react'
+import { useSelector,useDispatch } from 'react-redux'
 import CheckOutItem from './CheckOutItem';
+import { totalPriceCart } from '../actions/cart'
 
-
-const CheckOut = () => {
+const CheckOut = ({history}) => {
     
     const cart = useSelector(state=>state.cart);
-    const { cartItems } = cart;
-    const [total,setTotal]=useState(0);
+    const dispatch = useDispatch();
+    const { cartItems,totalPrice } = cart;
     useEffect(() => {
-        setTotal(cartItems.reduce((accumulatedSum,cartItem)=>accumulatedSum+cartItem.quantity*cartItem.price,0))
-        
+        dispatch(totalPriceCart())
     }, [cartItems])
     return (
-        <div className='checkout-page'>
-    <div className='checkout-header'>
-      <div className='header-block'>
-        <span>Product</span>
-      </div>
-      <div className='header-block'>
-        <span>Name</span>
-      </div>
-      <div className='header-block'>
-        <span>Quantity</span>
-      </div>
-      <div className='header-block'>
-        <span>Price</span>
-      </div>
-      <div className='header-block'>
-        <span>Remove</span>
-      </div>
+        <div className="checkout-page container mt-3">
+    <table className="table ">
+    <thead>
+      <tr>
+        <th scope="col">
+          Product
+        </th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Remove</th>
+        
+      </tr>
+    </thead>
 
-    </div>
+    </table>
     {cartItems.map(cartItem=>(
         <CheckOutItem cartItem={cartItem} />
     ))}
-    <div className='total'>TOTAL:{total}</div>
+    <div className='total'>
+        <h5>TOTAL:{totalPrice}</h5>
+        <button onClick={()=>history.push('/payment')} className="btn btn-primary">Proceed to Pay</button>
+    </div>
+    
+
     </div>
     
     )

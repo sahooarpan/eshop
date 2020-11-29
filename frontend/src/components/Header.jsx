@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
 import { logOut } from '../actions/user';
-import CartIcon from './CartIcon'
 const Header = () => {
 
 const auth = useSelector(state=>state.auth);
@@ -15,9 +14,9 @@ const handleLogOut=()=>{
 
 
   return (
-        <header className="row">
+        <header className="row mb-4">
             <div>
-          <Link className="brand" to="/">
+          <Link className="header-link brand" to="/">
             GeeksGrocery
           </Link>
         </div>
@@ -28,11 +27,11 @@ const handleLogOut=()=>{
       </i>
       </Link>
       
-      <Link to="/shop">{auth.userInfo.name}</Link>
-      <Link onClick={handleLogOut}>Sign Out</Link>
+      <Link className="header-link" to="/myorders">{auth.userInfo.name}</Link>
+      <Link onClick={handleLogOut} className="header-link">Sign Out</Link>
     </div>):( <div>
-      <Link to="/">Register</Link>
-      <Link to="/signin">Sign In</Link>
+      <Link className="header-link" to="/">Register</Link>
+      <Link to="/signin" className="header-link">Sign In</Link>
     </div>)
    }    
         </header>

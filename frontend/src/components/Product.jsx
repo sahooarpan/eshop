@@ -17,7 +17,7 @@ const Product = ({product}) => {
     <h4 className="text-primary mt-2 search-name card-text">
       Qunatity in Stock: {product.quantity_available}
     </h4>
-    <button onClick={handleClick} className="btn btn-warning mt-3 btn-block">Add to Cart</button>
+    <button disabled={product.quantity_available<=0} onClick={handleClick} className="btn btn-warning mt-3 btn-block">Add to Cart</button>
             </div>
         </div>
     )

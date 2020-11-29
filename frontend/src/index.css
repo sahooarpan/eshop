@@ -1,46 +1,31 @@
 html {
-  font-size: 62.5%; /* 16px x 62.5 = 10px = 1rem */
+  font-size: 1rem; /* 16px x 62.5 = 10px = 1rem */
   box-sizing: border-box;
 }
-body {
-  margin: 0;
-  height: 100vh;
-  font-size: 1.6rem;
-}
+
 
 #root {
   height: 100%;
 }
 
 /* Layout */
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'header'
-    'main'
-    'footer';
-  grid-template-columns: 1fr;
-  grid-template-rows: 5rem 1fr 5rem;
-  height: 100%;
-}
+
 header {
-  grid-area: header;
+  padding: 10px 0;
   background-color: #203040;
-}
-main {
-  grid-area: main;
-  padding: 1rem;
-}
-footer {
-  grid-area: footer;
-  background-color: #203040;
-  color: #ffffff;
 }
 /* Common */
 h1 {
   font-size: 1.8rem;
   padding: 1rem 0;
 }
+.form-container{
+  padding: 20px;
+}
+.payment-form{
+  margin-top: 90px;
+}
+
 h2 {
   font-size: 1.6rem;
   padding: 1rem 0;
@@ -50,6 +35,7 @@ a {
   text-decoration: none;
 }
 a:hover {
+  text-decoration: none;
   color: #ff8000;
 }
 /* Header */
@@ -192,6 +178,14 @@ input{
   margin-top: 30px;
   margin-left: auto;
   font-size: 36px;
+}
+
+.checkout-page .slot{
+  margin-right: auto;
+  font-size: 26px;
+  display: flex;
+  justify-content: space-around;
+  
 }
 .checkout-page button {
   margin-left: auto;
