@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
     dropDups: true,
   },
   password: { type: String, required: true },
-  confirmPassword: { type: String, required: true },
 });
 
 module.exports = mongoose.model("User", userSchema);

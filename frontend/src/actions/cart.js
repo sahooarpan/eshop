@@ -3,6 +3,7 @@ import {
   REMOVE_ITEM_FROM_CART,
   CLEAR_ITEM_FROM_CART,
   TOTAL_PRICE_CART,
+  TOTAL_ITEM_IN_CART,
 } from "./constants";
 
 export const addItemToCart = (item) => ({
@@ -22,4 +23,8 @@ export const clearItemFromCart = (item) => ({
 
 export const totalPriceCart = () => ({
   type: TOTAL_PRICE_CART,
+});
+
+export const getTotalItemInCart = () => ({
+  type: TOTAL_ITEM_IN_CART,
 });

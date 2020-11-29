@@ -13,44 +13,30 @@ userRouter.get("/", isAuth, async (req, res) => {
 });
 
 userRouter.post("/signup", async (req, res) => {
-  if (req.body.password !== req.body.confirmPassword) {
-    res
-      .status(401)
-      .json({ message: "Password and Confirm Password must be same!" });
-  }
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8),
-    confirmPassword: bcrypt.hashSync(req.body.confirmPassword, 8),
-  });
-
-  const createdUser = await user.save();
-  res.send({
-    _id: createdUser._id,
-    name: createdUser.name,
-    email: createdUser.email,
-    password: createdUser.password,
-    confirmPassword: createdUser.confirmPassword,
-    token: generateToken(createdUser),
-  });
-});
-
-userRouter.post('/email',async(req,res)=>{
   try {
-    const user = await User.find({email:req.body.email});
-    console.log(user.length);
-    if(user.length){
-      console.log("here")
-      res.status(200).json({user});
+    let user = await User.find({ email: req.body.email });
+    if (user.length) {
+      res.status(401).json({ message: "Email already exists" });
     }
-    
+
+    user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 8),
+    });
+
+    const createdUser = await user.save();
+    res.send({
+      _id: createdUser._id,
+      name: createdUser.name,
+      email: createdUser.email,
+      password: createdUser.password,
+      token: generateToken(createdUser),
+    });
   } catch (error) {
-   res.status(500).json({message:error.message}); 
+    res.status(500).send(error.message);
   }
-})
-
-
+});
 
 userRouter.post("/signin", async (req, res) => {
   try {
@@ -64,7 +50,11 @@ userRouter.post("/signin", async (req, res) => {
           email: user.email,
           token: generateToken(user),
         });
+      } else {
+        res.status(401).json({ message: "Wrong password" });
       }
+    } else {
+      res.status(401).json({ message: "Email do not exist" });
     }
   } catch (error) {
     res.status(500).send(error.message);

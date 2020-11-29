@@ -28,10 +28,9 @@ productRoute.put("/", isAuth, async (req, res) => {
     const { cartItems } = req.body;
     for (let cartItem of cartItems) {
       cartItem.quantity_available -= cartItem.quantity;
-      await Product.update(
+      await Product.updateOne(
         { _id: cartItem._id },
-        { quantity_available: cartItem.quantity_available },
-        { multi: true }
+        { quantity_available: cartItem.quantity_available }
       );
     }
     const products = await Product.find();

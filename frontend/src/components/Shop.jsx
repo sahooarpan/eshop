@@ -2,24 +2,21 @@ import React, { useEffect } from "react";
 import { getProducts } from "../actions/product";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "./Product";
+import Alert from "./Alert";
 
 const Shop = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.products);
   const { products, loading } = product;
-  console.log(products, "prdcts");
   useEffect(() => {
     dispatch(getProducts());
   }, []);
-
-  useEffect(() => {
-    console.log(products, "products");
-  }, [products]);
 
   return loading ? (
     <div>Loading...</div>
   ) : (
     <div className="container">
+      <Alert />
       <div className="row">
         {products &&
           products.map((product) => (

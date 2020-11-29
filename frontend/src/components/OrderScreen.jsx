@@ -8,7 +8,7 @@ const OrderScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(getOrder(match.params.id));
-  }, [dispatch,match.params.id]);
+  }, [dispatch, match.params.id]);
 
   return orderState && orderState.loading ? (
     <div>Loading...</div>

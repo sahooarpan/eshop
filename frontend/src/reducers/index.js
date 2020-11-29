@@ -5,7 +5,7 @@ import auth from "./userReducer";
 import products from "./productReducer";
 import cart from "./cartReducer";
 import order from "./orderReducer";
-
+import alert from "./alertReducer";
 const persistConfig = {
   key: "root",
   storage,
@@ -17,6 +17,7 @@ const rootReducer = combineReducers({
   products,
   cart,
   order,
+  alert,
 });
 
 export default persistReducer(persistConfig, rootReducer);

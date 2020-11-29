@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { setAlert } from "../actions/alert";
 import { placeOrder } from "../actions/order";
 import { updateProducts } from "../actions/product";
 
@@ -9,6 +10,17 @@ const Payment = ({ history }) => {
   const dispatch = useDispatch();
   const [deliverySlot, setDeliverySlot] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      dispatch(
+        setAlert(
+          "Please add items to cart first then proceed to pay :)",
+          "alert-danger"
+        )
+      );
+      history.push("/shop");
+    }
+  }, []);
   const handlePayment = (e) => {
     e.preventDefault();
     dispatch(
@@ -20,6 +32,9 @@ const Payment = ({ history }) => {
       })
     );
     dispatch(updateProducts({ cartItems }));
+    dispatch(
+      setAlert("Congrats!,All items ordered successfully", "alert-success")
+    );
     history.push("/myorders");
   };
   return (

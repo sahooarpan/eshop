@@ -4,11 +4,13 @@ import {
   REMOVE_ITEM_FROM_CART,
   TOTAL_PRICE_CART,
   EMPTY_CART,
+  TOTAL_ITEM_IN_CART,
 } from "../actions/constants";
 
 const initialState = {
   cartItems: [],
   totalPrice: 0,
+  totalItems: 0,
 };
 
 export default function cartReducer(state = initialState, action) {
@@ -20,7 +22,6 @@ export default function cartReducer(state = initialState, action) {
         (item) => item._id === itemToAdd._id
       );
       if (existingItem) {
-        console.log("Item present in caert");
         return {
           ...state,
           cartItems: state.cartItems.map((cartItem) =>
@@ -74,11 +75,20 @@ export default function cartReducer(state = initialState, action) {
           0
         ),
       };
+    case TOTAL_ITEM_IN_CART:
+      return {
+        ...state,
+        totalItems: state.cartItems.reduce(
+          (accumulatedSum, cartItem) => accumulatedSum + cartItem.quantity,
+          0
+        ),
+      };
     case EMPTY_CART:
       return {
         ...state,
         cartItems: [],
         totalPrice: 0,
+        totalItems: 0,
       };
 
     default:

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyOrders } from "../actions/order";
+import Alert from "./Alert";
 
 const OrderHistory = ({ history }) => {
   const order = useSelector((state) => state.order);
@@ -15,7 +16,8 @@ const OrderHistory = ({ history }) => {
         <div>Loading..</div>
       ) : (
         <div className="container">
-          <h3 className="mt-3">Order History</h3>
+          <Alert />
+          <h3 className="mt-3">Your Order History</h3>
           <div class="table-responsive">
             <table className="table table-striped">
               <thead>
@@ -28,25 +30,31 @@ const OrderHistory = ({ history }) => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order) => (
-                  <tr key={order._id}>
-                    <td>{order._id}</td>
-                    <td>{order.paymentMethod}</td>
-                    <td>{order.deliverySlot}</td>
-                    <td>{order.totalPrice}</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          history.push(`/order/${order._id}`);
-                        }}
-                      >
-                        Details
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {orders.length === 0 ? (
+                  <p className="text-center text-primary mt-2">
+                    Currently your orders is 0 in GeeksGrocery
+                  </p>
+                ) : (
+                  orders.map((order) => (
+                    <tr key={order._id}>
+                      <td>{order._id}</td>
+                      <td>{order.paymentMethod}</td>
+                      <td>{order.deliverySlot}</td>
+                      <td>{order.totalPrice}</td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            history.push(`/order/${order._id}`);
+                          }}
+                        >
+                          Details
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

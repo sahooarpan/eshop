@@ -21,13 +21,13 @@ const App = () => {
   }
   useEffect(() => {
     dispatch(userLoad());
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
       <Header />
 
-      <main>
+      <div>
         <Switch>
           <Route exact path="/signin" component={SignIn} />
           <PrivateRoute exact path="/shop" component={Shop} />
@@ -37,7 +37,7 @@ const App = () => {
           <PrivateRoute path="/order/:id" component={OrderScreen} />
           <Route exact path="/" component={SignUp} />
         </Switch>
-      </main>
+      </div>
     </BrowserRouter>
   );
 };

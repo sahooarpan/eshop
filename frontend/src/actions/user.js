@@ -11,10 +11,10 @@ import {
   USER_LOAD_FAIL,
 } from "./constants";
 import axios from "axios";
+import { setAlert } from "./alert";
+import { EMPTY_CART } from "./constants";
 
-export const register = (name, email, password, confirmPassword) => async (
-  dispatch
-) => {
+export const register = (name, email, password) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST });
   try {
     const { data } = await axios.post(
@@ -23,7 +23,6 @@ export const register = (name, email, password, confirmPassword) => async (
         name,
         email,
         password,
-        confirmPassword,
       }
     );
     dispatch({
@@ -32,6 +31,7 @@ export const register = (name, email, password, confirmPassword) => async (
     });
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
+    dispatch(setAlert("Email already exists", "alert-danger"));
     dispatch({
       type: USER_REGISTER_FAIL,
       payload:
@@ -58,17 +58,17 @@ export const login = (email, password) => async (dispatch) => {
     });
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
+    console.log("Sign In Failed");
+    dispatch(setAlert("Invalid Email or Password!", "alert-danger"));
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: "Invalid Email or Password!",
     });
   }
 };
 
 export const logOut = () => async (dispatch) => {
+  dispatch({ type: EMPTY_CART });
   dispatch({ type: USER_LOGOUT });
 };
 

@@ -9,7 +9,7 @@ const CheckOut = ({ history }) => {
   const { cartItems, totalPrice } = cart;
   useEffect(() => {
     dispatch(totalPriceCart());
-  }, [cartItems,dispatch]);
+  }, [cartItems, dispatch]);
   return (
     <div className="checkout-page container mt-4">
       <table className="table ">
@@ -29,7 +29,7 @@ const CheckOut = ({ history }) => {
       <div className="total">
         <h5>TOTAL:{totalPrice}</h5>
         <button
-          disabled={cartItems.length===0}  
+          disabled={cartItems.length === 0}
           onClick={() => history.push("/payment")}
           className="btn btn-primary"
         >

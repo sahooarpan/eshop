@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../actions/user";
+import { getTotalItemInCart } from "../actions/cart";
 const Header = () => {
   const auth = useSelector((state) => state.auth);
-
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, totalItems } = cart;
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
     dispatch(logOut());
   };
+
+  useEffect(() => {
+    dispatch(getTotalItemInCart());
+  }, [cartItems, dispatch]);
 
   return (
     <header className="row mb-4">
@@ -21,7 +27,8 @@ const Header = () => {
       {auth.userInfo ? (
         <div className="cart-items">
           <Link to="/checkout" className="cart">
-            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-shopping-cart mr-2"></i>
+            <span class="badge badge-light">{totalItems}</span>
           </Link>
 
           <Link className="header-link" to="/myorders">

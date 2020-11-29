@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../actions/user";
 import { withRouter } from "react-router-dom";
+import Alert from "./Alert";
 const SignIn = ({ history }) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -26,6 +27,8 @@ const SignIn = ({ history }) => {
             <h2 className="text-center">Sign In</h2>
           </li>
 
+          <Alert />
+
           <li>
             <label htmlFor="email">Email</label>
             <input
@@ -45,7 +48,11 @@ const SignIn = ({ history }) => {
             />
           </li>
           <li>
-            <button disabled={email==='' || password ==='' } className="button primary text-center" type="submit">
+            <button
+              disabled={email === "" || password === ""}
+              className="button primary text-center"
+              type="submit"
+            >
               Sign In
             </button>
           </li>
