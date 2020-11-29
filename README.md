@@ -1,4 +1,4 @@
-# HOTEL ROOM BOOKING APP
+# GEEKS VILLA SHOPPING APP
 
 ## Available Scripts
 
